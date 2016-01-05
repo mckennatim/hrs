@@ -1,8 +1,9 @@
 <blockquote>The React components are just a stateless projection of the state at a given point in time.</blockquote>
-ref: <a href="http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html">Full-Stack Redux Tutorial
+ref: 
+- <a href="http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html">Full-Stack Redux Tutorial
 A Comprehensive Guide to Test-First Development with Redux, React, and Immutable
 Posted on Thursday Sep 10, 2015 by Tero Parviainen (@teropa)</a>
-<a href="https://github.com/babel/example-node-server"></a>
+- <a href="https://github.com/babel/example-node-server">babel node server</a>
 
 ## install
     npm install
