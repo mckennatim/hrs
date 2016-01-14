@@ -1,8 +1,8 @@
-import { expect } from 'chai';
-import { List, Map, fromJS } from 'immutable';
+import {expect} from 'chai';
+import {List, Map, fromJS} from 'immutable';
 
 
-describe("an immutable map",()=>{
+describe("hrs",()=>{
 	describe("a map",()=>{
 		it("modifies a map", ()=>{
 			let state = new Map({panel: "auto", relay: "on", by: 'forecast'})
@@ -13,8 +13,8 @@ describe("an immutable map",()=>{
 		});
 		it("modifies a bigger map", ()=>{
 			let state = fromJS({ctrl: {panel: "auto", relay: "on", by: 'forecast'},
-				cond: {temp: 67, sky: "cloudy"},
-				forecast: {isSnow: true, when: "now", accum: 10}});
+													cond: {temp: 67, sky: "cloudy"},
+													forecast: {isSnow: true, when: "now", accum: 10}});
 			let nextState = state.setIn(['ctrl', 'by'], 'user')
 			//console.log(state)
 			expect(state.getIn(['ctrl', 'by'])).to.equal("forecast")

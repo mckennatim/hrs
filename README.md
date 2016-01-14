@@ -5,6 +5,47 @@ A Comprehensive Guide to Test-First Development with Redux, React, and Immutable
 Posted on Thursday Sep 10, 2015 by Tero Parviainen (@teropa)</a>
 - <a href="https://github.com/babel/example-node-server">babel node server</a>
 
+
+
+It is a much better idea to, whenever you can, make operations work on the smallest piece (or subtree) of the state possible. What we're talking about is modularization: Have the functionality that deals with a given piece of data deal with only that part of the data, as if the rest didn't exist.    
+
+## immutable examples
+
+    let state = fromJS({ctrl: {panel: "auto", relay: "on", by: 'forecast'},
+                    cond: {temp: 67, sky: "cloudy"},
+                    forecast: {isSnow: true, when: "now", accum: 10}});
+    let nextState = state.setIn(['ctrl', 'by'], 'user')
+    expect(state.getIn(['ctrl', 'by'])).to.equal("forecast")
+
+`['ctrl', 'by']` is the `keypath`
+
+## notes
+
+map creates a new array, foreach doesn't
+# client
+## install
+    npm install
+## run in dev
+    webpack-dev-server --port 4444
+## deploy
+    npm run deploy 
+
+This runs `"deploy": "set NODE_ENV=production&& webpack -p --config webpack.production.config.js"` creating `dist/app.js`(5 KB) and `dist/vendors.js`(186 KB) which are the only files you need for deployment!  `index.htm` looks like this:
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>hrs</title>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script src="vendors.js"></script>
+        <script src="app.js"></script>
+    </body>
+    </html>
+
+- note: windows requires that deploy string, mostly you see examples like `"deploy": "NODE_ENV=production webpack -p --config webpack.production.config.js"`  but that doesn't work in windows. 
+# server
 ## install
     npm install
 ## dev server
@@ -29,28 +70,16 @@ test/test_helper.js
     import chaiImmutable from 'chai-immutable';
     chai.use(chaiImmutable);
 
-    "scripts": {
-      "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js  --recursive",
-      "test:watch": "npm run test -- --watch"
-    },
+  "scripts": {
+    "start": "nodemon lib/index.js --exec babel-node --presets es2015,stage-2 --watch lib",
+    "build": "babel lib -d dist --presets es2015,stage-2",
+    "serve": "node dist/index.js",
+    "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js  --recursive --slow 4",
+    "test:watch": "npm run test -- --watch"
+  },
+`nodemon` restarts the server `lib/index.js` whenever the `--watch`ed directory changes. When it resarts it has to transpile all the es6 code to es5.
 
-It is a much better idea to, whenever you can, make operations work on the smallest piece (or subtree) of the state possible. What we're talking about is modularization: Have the functionality that deals with a given piece of data deal with only that part of the data, as if the rest didn't exist.    
-
-## immutable examples
-
-    let state = fromJS({ctrl: {panel: "auto", relay: "on", by: 'forecast'},
-                    cond: {temp: 67, sky: "cloudy"},
-                    forecast: {isSnow: true, when: "now", accum: 10}});
-    let nextState = state.setIn(['ctrl', 'by'], 'user')
-    expect(state.getIn(['ctrl', 'by'])).to.equal("forecast")
-
-`['ctrl', 'by']` is the `keypath`
-
-## notes
-
-map creates a new array, foreach doesn't
-# client
-# server
+`build`s an es5 version of your es6 code (in lib) and puts it in /dist
 ## modules
 ### verify-addr
 A module that provides an api for a store of addresses kept in the mysql `forecast` db and `locations` table. It has the following fields.

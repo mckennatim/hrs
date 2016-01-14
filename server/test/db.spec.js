@@ -2,18 +2,20 @@ import {expect} from 'chai';
 var request= require('request');
 var cons = require('tracer').console();
 var mconn = require('../lib/cfg').db().mysql;
-console.log(mconn)
-
 var mysql      = require('mysql');
 var connection = mysql.createConnection(mconn);
+import * as ydb from '../lib/modules/verify-addr/db.js' 
+
+//console.log(mconn)
 
 connection.connect();
 //console.log(connection.config);
 var conf = connection.config;
 var locations;
+var homeId;
 
 describe("connection",()=>{
-	var post ={location: '12 Parley Vale, Jamaica Plain, MA 02130', st:'MA'}
+	var post ={raw: '12 Parley Vale, Jamaica Plain, MA 02130', st:'MA'}
 	it('connects', ()=>{
 		expect(conf.user).to.equal('root');
 		expect(conf.database).to.equal('forecast');
@@ -26,12 +28,10 @@ describe("connection",()=>{
 		});
 	});
 	it('select from locations', (done)=>{
-		connection.query('SELECT * FROM locations', function(err, rows, fields) {
-		  if (err) throw err;
-		  var sol =rows[2].location
-		  console.log(sol);
-		  expect(sol).to.equal('Climax Mine, Colorado')
-		  done();
+		ydb.getv(function(sol){
+			//console.log(sol[2].raw)
+		  expect(sol[2].raw).to.equal('Climax Mine, Colorado')
+		  done();			
 		});
 	});
 	it('inserts into locations home',(done)=>{
@@ -43,7 +43,7 @@ describe("connection",()=>{
 		});
 	})
 	it('deletes locations home',(done)=>{
-		connection.query('DELETE FROM `locations` WHERE `location` ="'+post.location+'" ', post, function(err, result) {
+		connection.query('DELETE FROM `locations` WHERE `raw` ="'+post.raw+'" ', post, function(err, result) {
 		  if (err) throw err;
 		  //console.log(result)
 		  expect(result.affectedRows).to.equal(2)
@@ -53,17 +53,28 @@ describe("connection",()=>{
 	it('inserts into locations home',(done)=>{
 		connection.query('INSERT INTO `locations` SET ?', post, function(err, result) {
 		  if (err) throw err;
-		  //console.log(result)
+		  homeId=result.insertId;
+		  console.log(homeId)
 		  expect(result.affectedRows).to.equal(1)
 		  done();
 		});
 	})
+	it('updates the home record', function(done){
+		var sql = "UPDATE locations SET ? WHERE id = ?";
+		var inserts =[{address: 'froggyoggyland', lat: 14.345, lng: -72.444}, homeId];
+		sql = mysql.format(sql, inserts)
+		connection.query(sql, function(err,result){
+			//console.log(result);
+			expect(result.affectedRows).to.equal(1)
+			done();
+		})
+	})
 	it('lists locations from array, foreach `loc+dog` does not alter locations ',(done)=>{
-		connection.query('SELECT location from locations', post, function(err, rows, fields) {
+		connection.query('SELECT raw from locations', function(err, rows, fields) {
 		  if (err) throw err;
 		 	locations= rows.map((row)=>{
-		 		//console.log(row.location)
-		 		return row.location
+		 		//console.log(row.raw)
+		 		return row.raw
 		 	})
 		 	locations.forEach((loc)=>{
 		 		loc = loc+'  dog';
@@ -71,15 +82,15 @@ describe("connection",()=>{
 		 	})
 		 	//console.log(locations)
 		  expect(locations[2]).to.equal('Climax Mine, Colorado')
-		  expect(locations[2]).to.equal(rows[2].location)
+		  expect(locations[2]).to.equal(rows[2].raw)
 		  done();
 		});
 	});
 	it('gets 1 location then looks up its address', (done)=>{
-		connection.query('SELECT location,	st from locations', post, function(err, rows, fields) {
+		connection.query('SELECT raw,	st from locations', function(err, rows, fields) {
 		  if (err) throw err;
 		 	locations= rows.map((row)=>{
-		 		return row.location+', '+row.st
+		 		return row.raw+', '+row.st
 		 	})
 		 	//console.log(locations)
 		 	var addr = locations.map((loc)=>{
