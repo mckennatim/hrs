@@ -102,5 +102,8 @@ The module provides the following services:
 - put('/api/hrs/verify-addr/:id') //updates with 200 or 204(no content) or 404 (not found/invalid)
 - delete('/api/hrs/verify-addr/:id') //deletes with 200 or 404 (not found)
 
-
-
+## tags
+### 01-basic-working-client-server
+Server using mysql with tests and a client with basic `redux-simple-route`ing and testing all `babel`ed up with `webpack` watching.
+### 02-hot loader-client
+Did not work when client/index.html. Needs it to be in ./dist and `contentBase: './dist',` 

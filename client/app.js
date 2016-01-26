@@ -6,7 +6,7 @@ const { Router, Route, IndexRoute } = require('react-router');
 const createHistory = require('history/lib/createHashHistory');
 const { syncReduxAndRouter, routeReducer } = require('redux-simple-router');
 const reducers = require('./reducers');
-const { App, Home, Ver, Unver } = require('./components');
+const { App, Home, Ver, Unver, Wea } = require('./components');
 
 const reducer = combineReducers(Object.assign({}, reducers, {
   routing: routeReducer
@@ -24,6 +24,7 @@ ReactDOM.render(
           <IndexRoute component={Home}/>
           <Route path="ver" component={Ver}/>
           <Route path="unver" component={Unver}/>
+          <Route path="wea" component={Wea}/>
         </Route>
       </Router>
     </div>

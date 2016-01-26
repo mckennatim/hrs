@@ -13,6 +13,8 @@ function App({ pushPath, children }) {
         {' '}
         <Link to="/ver">Ver</Link>
         {' '}
+        <Link to="/wea">Wea</Link>
+        {' '}
         <Link to="/unver">Unver</Link>
       </header>
       <div>

@@ -5,7 +5,7 @@ const { increase, decrease } = require('../actions/count');
 function Home({ number, increase, decrease }) {
   return (
     <div>
-      Some state changes:
+      Some state change:
       {number}
       <button onClick={() => increase(1)}>Increase</button>
       <button onClick={() => decrease(1)}>Decrease</button>

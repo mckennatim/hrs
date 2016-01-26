@@ -1,7 +1,6 @@
 0 info it worked if it ends with ok
 1 verbose cli [ 'c:\\Program Files\\nodejs\\node.exe',
 1 verbose cli   'c:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
-1 verbose cli   'run',
 1 verbose cli   'start' ]
 2 info using npm@2.14.7
 3 info using node@v4.2.3
@@ -9,7 +8,7 @@
 4 verbose stack     at Error (native)
 5 verbose cwd c:\wamp\www\redux\sb\hrs
 6 error Windows_NT 6.1.7601
-7 error argv "c:\\Program Files\\nodejs\\node.exe" "c:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run" "start"
+7 error argv "c:\\Program Files\\nodejs\\node.exe" "c:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "start"
 8 error node v4.2.3
 9 error npm  v2.14.7
 10 error path c:\wamp\www\redux\sb\hrs\package.json

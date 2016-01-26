@@ -54,6 +54,7 @@ add a first test `test1.spec.js`
 btw: `webpack.config.js` should now look like...
 
     const path = require('path');
+
     module.exports = {
       entry: './app.js',
       output: {

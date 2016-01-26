@@ -1,7 +1,12 @@
 const path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
-  entry: './app.js',
+  entry: [
+    'webpack-dev-server/client?http://localhost:3037',
+    'webpack/hot/only-dev-server',
+    './app.js'
+  ],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js'
@@ -9,13 +14,21 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.jsx?$/,
-      loaders: ['babel?presets[]=react,presets[]=es2015'],
+      loader: 'react-hot!babel',
       exclude: /node_modules/,
       include: __dirname
     }]
   },
   resolve: {
     extensions: ['', '.js', '.jsx']
-  },  
+  },
+  devServer: {
+    contentBase: './dist',
+    hot: true
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ]    
 }
 
+//      loaders: ['babel?presets[]=react,presets[]=es2015'],
