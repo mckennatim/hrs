@@ -1,6 +1,6 @@
 const React = require('react');
 const { connect } = require('react-redux');
-const { increase, decrease } = require('../actions/count');
+import { increase, decrease } from '../actions/count';
 
 function Home({ number, increase, decrease }) {
   return (
@@ -13,7 +13,9 @@ function Home({ number, increase, decrease }) {
   );
 };
 
-module.exports = connect(
+Home = connect(
   state => ({ number: state.count.number }),
   { increase, decrease }
 )(Home);
+
+export {Home};

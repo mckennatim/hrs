@@ -4,11 +4,11 @@ var node_modules_dir = path.resolve(__dirname, 'node_modules');
 
 var config = {
   entry: {
-    app: path.resolve(__dirname, './src/index.jsx'),
+    app: path.resolve(__dirname, './src/app.js'),
     vendors: ['react'] // And other vendors
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist2'),
     filename: '[name].js' // Notice we use a variable
   },
   module: {

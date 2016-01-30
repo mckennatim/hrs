@@ -25,7 +25,6 @@ function App({ pushPath, children }) {
   );
 };
 
-module.exports = connect(
-  null,
-  { pushPath }
-)(App);
+App = connect(null, { pushPath })(App);
+
+export {App};

@@ -3,6 +3,7 @@ ref:
 - <a href="http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html">Full-Stack Redux Tutorial
 A Comprehensive Guide to Test-First Development with Redux, React, and Immutable
 Posted on Thursday Sep 10, 2015 by Tero Parviainen (@teropa)</a>
+<a href="https://auth0.com/blog/2016/01/04/secure-your-react-and-redux-app-with-jwt-authentication/">react-and-redux-app-with-jwt-authentication</a>
 - <a href="https://github.com/babel/example-node-server">babel node server</a>
 
 
@@ -106,4 +107,4 @@ The module provides the following services:
 ### 01-basic-working-client-server
 Server using mysql with tests and a client with basic `redux-simple-route`ing and testing all `babel`ed up with `webpack` watching.
 ### 02-hot loader-client
-Did not work when client/index.html. Needs it to be in ./dist and `contentBase: './dist',` 
+Did not work when client/index.html. Needs it to be in ./dist and `contentBase: './dist',` Then got `webpack.production.config.js` to work sending app.js(70k) and vendors.js(186k) to /dist2. Nice and small.

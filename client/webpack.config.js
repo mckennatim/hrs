@@ -5,7 +5,7 @@ module.exports = {
   entry: [
     'webpack-dev-server/client?http://localhost:3037',
     'webpack/hot/only-dev-server',
-    './app.js'
+    './src/app.js'
   ],
   output: {
     path: path.join(__dirname, 'dist'),
@@ -30,5 +30,3 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin()
   ]    
 }
-
-//      loaders: ['babel?presets[]=react,presets[]=es2015'],

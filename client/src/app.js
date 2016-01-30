@@ -4,14 +4,20 @@ const { compose, createStore, combineReducers } = require('redux');
 const { Provider } = require('react-redux');
 const { Router, Route, IndexRoute } = require('react-router');
 const createHistory = require('history/lib/createHashHistory');
-const { syncReduxAndRouter, routeReducer } = require('redux-simple-router');
-const reducers = require('./reducers');
+//const { syncReduxAndRouter, routeReducer } = require('redux-simple-router');
+const { syncReduxAndRouter} = require('redux-simple-router');
+//const reducers = require('./reducers');
 const { App, Home, Ver, Unver, Wea } = require('./components');
+import rootReducer from './reducers';
+import configureStore from './store/configureStore'
 
-const reducer = combineReducers(Object.assign({}, reducers, {
-  routing: routeReducer
-}));
-const store = createStore(reducer);
+const store = configureStore()
+
+// const reducer = combineReducers(Object.assign({}, reducers, {
+//   routing: routeReducer
+// }));
+//console.log(reducer)
+//const store = createStore(reducer);
 const history = createHistory();
 
 syncReduxAndRouter(history, store);

@@ -1,15 +1,15 @@
-function increase(n) {
+const increase = (n) => {
   return {
     type: 'INCREASE',
     amount: n
   };
 }
 
-function decrease(n) {
+const decrease = (n) => {
   return {
     type: 'DECREASE',
     amount: n
   };
 }
 
-module.exports = { increase, decrease };
+export { increase, decrease };
