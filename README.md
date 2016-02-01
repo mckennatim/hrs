@@ -108,3 +108,6 @@ The module provides the following services:
 Server using mysql with tests and a client with basic `redux-simple-route`ing and testing all `babel`ed up with `webpack` watching.
 ### 02-hot loader-client
 Did not work when client/index.html. Needs it to be in ./dist and `contentBase: './dist',` Then got `webpack.production.config.js` to work sending app.js(70k) and vendors.js(186k) to /dist2. Nice and small.
+### 03-async-result
+- make an asynch call
+- return result to page

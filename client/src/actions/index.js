@@ -1,11 +1,37 @@
+import fetch from 'isomorphic-fetch'
 import {increase, decrease} from './count'
 
-const ckAddr = (raw) => {
+const reqAddr = (raw) => {
 	console.log(raw)
 	return {
-		type: 'CK_ADDR',
+		type: 'REQ_ADDR',
 		raw
 	}
 }
 
-export {increase, decrease, ckAddr};
+const recAddr = (raw, json) => {
+	console.log(raw)
+	return {
+		type: 'REC_ADDR',
+		result: json,
+		raw
+	}
+}
+
+const fetchAddr = (raw) => {
+	return dispatch => {
+		dispatch(reqAddr(raw))
+	  const eraw = `?address=`+raw.split(' ').join('+')+`&sensor=false`
+	  const url = `http://maps.googleapis.com/maps/api/geocode/json`
+	  console.log(url+eraw)
+	  return fetch(url+eraw)
+	    .then(response => response.json()) //same as function(response){return response.json()}
+	    .then((json)=>{
+	      console.log(json.results.length)
+	      dispatch(recAddr(raw, json.results[0])) 
+	    })		
+	}
+}
+
+
+export {increase, decrease, fetchAddr};
