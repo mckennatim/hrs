@@ -28,110 +28,18 @@
 	"buffers":
 	[
 		{
-			"contents": "var secret = 'some phrase to be used to encode token';\nvar url = 'http://10.0.1.102'\nvar port = 3036;\nvar db= 'hero';\n\nexports.cfg = function(){\n	return{\n		secret:secret,\n		url:url,\n		port: port\n	}\n}\n\nexports.gmail= function() {\n	return {\n		service: 'Gmail',\n		auth: {\n		    user: \"mckenna.tim@gmail.com\",\n		    pass: \"Gonji9ol\" \n      	}		\n	}\n}\n\nexports.db = function(){\n	return{\n		mongo:{\n			url: 'mongodb://localhost/'+db,\n			db: db\n		},\n		mysql:{\n		  host     : 'localhost',\n		  user     : 'root',\n		  password : '',\n		  database : 'forecast'			\n		}				\n	}\n}",
-			"file": "server/cfg.js",
-			"file_size": 598,
-			"file_write_time": 130964186188013849,
+			"file": "client/src/components/Ver.js",
 			"settings":
 			{
-				"buffer_size": 562,
+				"buffer_size": 1660,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "server/modules/verify-addr/verifyAddr.js",
+			"file": "client/src/containers/Container.js",
 			"settings":
 			{
-				"buffer_size": 0,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "server/modules/verify-addr/db.js",
-			"settings":
-			{
-				"buffer_size": 199,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "function dog(){\n	console.log('uli is a good dog')\n}\n\ndog();",
-			"file": "server/index.js",
-			"file_size": 63,
-			"file_write_time": 130964779378928774,
-			"settings":
-			{
-				"buffer_size": 59,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "#!/usr/bin/env node\nvar http = require('http')\nvar app = require('./app');\nvar cfg = require('./cfg').cfg();\n\n\napp.set('port', process.env.PORT || cfg.port);\nvar server = http.createServer(app);\n\nserver.listen(app.get('port'), function(){\n		console.log('Express server listening on port ' + server.address().port);\n});\n\n\n\n\n",
-			"file": "server/server.js",
-			"file_size": 339,
-			"file_write_time": 130964784513252441,
-			"settings":
-			{
-				"buffer_size": 323,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "var express = require('express');\nvar path = require('path');\nvar logger = require('morgan');\nvar cookieParser = require('cookie-parser');\nvar bodyParser = require('body-parser');\nvar blank = require('./modules/blank/routes');\nvar verifyAddr = require('./modules/verify-addr/routes');\n\n\nvar app = express();\n\napp.use(logger('dev'));\napp.use(bodyParser.json());\napp.use(bodyParser.urlencoded({extended: true}));\napp.use(cookieParser());\napp.use(express.static(path.join(__dirname, 'public')));\n/*-----------------------------setup to allow for cross domain use-----------------------------------*/\napp.all('*', function(req,res,next){\n    var htt= req.headers.origin;\n    res.header(\"Access-Control-Allow-Origin\", htt);\n    res.header(\"Access-Control-Allow-Credentials\", true);\n    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE, OPTIONS');\n    res.header(\"Access-Control-Allow-Headers\", \"Origin, X-Requested-With, Content-Type, Accept, x-xsrf-token, Authorization\");\n    next();\n});\n\n\napp.get('/', function(req, res) {\n  res.send('at the root of nothing');\n});\n\napp.get('/api', function(req, res) {\n  res.send('at the api');\n});\napp.use('/api', blank);\n\napp.get('/api/hrs', function(req, res) {\n  res.send('at the api/hrs');\n});\napp.use('/api/hrs', verifyAddr);\n\n\nif (app.get('env') === 'development') {\n    app.use(function(err, req, res, next) {\n        res.status(err.status || 500);\n        res.json({\n          message: err.message,\n          error: err\n        });\n    });\n}\nmodule.exports = app;\n",
-			"file": "server/app.js",
-			"file_size": 1572,
-			"file_write_time": 130964181324025645,
-			"settings":
-			{
-				"buffer_size": 1520,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "server/package.json",
-			"settings":
-			{
-				"buffer_size": 1158,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "server/node_modules/babel-cli/bin/babel.js",
-			"settings":
-			{
-				"buffer_size": 46,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "server/modules/blank/routes.js",
-			"settings":
-			{
-				"buffer_size": 285,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "README.md",
-			"settings":
-			{
-				"buffer_size": 2869,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "server/test/db.spec.js",
-			"settings":
-			{
-				"buffer_size": 3444,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "server/modules/verify-addr/routes.js",
-			"settings":
-			{
-				"buffer_size": 305,
+				"buffer_size": 344,
 				"line_ending": "Windows"
 			}
 		}
@@ -186,26 +94,32 @@
 	"expanded_folders":
 	[
 		"/C/wamp/www/redux/sb/hrs",
+		"/C/wamp/www/redux/sb/hrs/client",
+		"/C/wamp/www/redux/sb/hrs/client/src",
+		"/C/wamp/www/redux/sb/hrs/client/src/components",
+		"/C/wamp/www/redux/sb/hrs/client/src/containers",
 		"/C/wamp/www/redux/sb/hrs/server",
-		"/C/wamp/www/redux/sb/hrs/server/modules",
-		"/C/wamp/www/redux/sb/hrs/server/modules/blank",
-		"/C/wamp/www/redux/sb/hrs/server/modules/verify-addr",
-		"/C/wamp/www/redux/sb/hrs/server/node_modules/babel-cli",
-		"/C/wamp/www/redux/sb/hrs/server/node_modules/babel-cli/bin",
-		"/C/wamp/www/redux/sb/hrs/server/node_modules/chai",
-		"/C/wamp/www/redux/sb/hrs/server/node_modules/chai/lib",
-		"/C/wamp/www/redux/sb/hrs/server/node_modules/chai/lib/chai",
 		"/C/wamp/www/redux/sb/hrs/server/test"
 	],
 	"file_history":
 	[
+		"/C/wamp/www/redux/sb/hrs/server/package.json",
+		"/C/wamp/www/redux/sb/hrs/README.md",
+		"/C/wamp/www/redux/sb/hrs/server/test/db.spec.js",
+		"/C/wamp/www/redux/sb/hrs/server/index.js",
+		"/C/wamp/www/redux/sb/hrs/server/cfg.js",
+		"/C/wamp/www/redux/sb/hrs/server/server.js",
+		"/C/wamp/www/redux/sb/hrs/server/app.js",
+		"/C/wamp/www/redux/sb/hrs/server/modules/verify-addr/routes.js",
+		"/C/wamp/www/redux/sb/hrs/server/modules/blank/routes.js",
+		"/C/wamp/www/redux/sb/hrs/server/modules/verify-addr/db.js",
+		"/C/wamp/www/redux/sb/hrs/server/modules/verify-addr/verifyAddr.js",
 		"/C/wamp/www/redux/sb/hrs/server/modules/blank.js",
 		"/C/wamp/www/redux/sb/hrs/hrs.sublime-project",
 		"/C/Users/tim/AppData/Local/Temp/scp09177/home/stuff2get/public_html/s2g-api/server2.js",
 		"/C/Users/tim/AppData/Local/Temp/TextEditorAnywhere_15_52_43.mediawiki",
 		"/C/Users/tim/AppData/Local/Temp/TextEditorAnywhere_15_06_29.mediawiki",
 		"/C/wamp/www/redux/sb/hrs/client/package.json",
-		"/C/wamp/www/redux/sb/hrs/README.md",
 		"/C/wamp/www/fiddles/blank/index.html",
 		"/C/wamp/www/node/sb/heroo-server/server.js",
 		"/C/wamp/www/redux/sb/hrs/client/webpack.config.js",
@@ -224,7 +138,6 @@
 		"/C/wamp/www/redux/sb/hrs/server/test/test_helper.js",
 		"/C/wamp/www/node/sb/tokau-io-server/modules/io/sio.js",
 		"/C/wamp/www/redux/sb/hrs/server/test/hrs.spec.js",
-		"/C/wamp/www/redux/sb/hrs/server/package.json",
 		"/C/wamp/www/redux/sb/hrs/package.json",
 		"/C/wamp/www/redux/redux/examples/counter/store/configureStore.js",
 		"/C/wamp/www/redux/redux/examples/counter/containers/App.js",
@@ -317,16 +230,7 @@
 		"/C/wamp/www/tmstack/iot/heroco/server/node-token-auth/app.js",
 		"/C/wamp/www/tmstack/iot/heroco/server/node-token-auth/cfg.js",
 		"/C/wamp/www/tmstack/iot/heroco/server/node-token-auth/package.json",
-		"/C/wamp/www/node/sb/cors/app.js",
-		"/C/wamp/www/node/sb/cors/package.json",
-		"/C/wamp/www/mckennatim/index.html",
-		"/C/Users/tim/AppData/Local/Temp/scp43524/home/wiki/public_html/wiki/LocalSettings.php",
-		"/C/wamp/www/tmstack/qr/css/style.css",
-		"/C/wamp/www/fiddles/index.html",
-		"/C/wamp/www/node/fiddles/me/package.json",
-		"/C/wamp/www/fiddles/interviewq/README.md",
-		"/C/wamp/www/tmstack/qr/index.html",
-		"/C/wamp/www/fiddles/js/js-math/index.html"
+		"/C/wamp/www/node/sb/cors/app.js"
 	],
 	"find":
 	{
@@ -477,46 +381,16 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "server/cfg.js",
+					"file": "client/src/components/Ver.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 562,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								435,
-								435
-							]
-						],
-						"settings":
-						{
-							"mediawiker_wiki_instead_editor": false,
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 173.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 10,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "server/modules/verify-addr/verifyAddr.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 0,
+						"buffer_size": 1660,
 						"regions":
 						{
 						},
@@ -529,7 +403,7 @@
 						],
 						"settings":
 						{
-							"mediawiker_wiki_instead_editor": false,
+							"hasHeader": false,
 							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
 						},
 						"translation.x": 0.0,
@@ -537,126 +411,6 @@
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "server/modules/verify-addr/db.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 199,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								199,
-								199
-							]
-						],
-						"settings":
-						{
-							"mediawiker_wiki_instead_editor": false,
-							"open_with_edit": true,
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "server/index.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 59,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								44,
-								44
-							]
-						],
-						"settings":
-						{
-							"mediawiker_wiki_instead_editor": false,
-							"open_with_edit": true,
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "server/server.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 323,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								323,
-								323
-							]
-						],
-						"settings":
-						{
-							"mediawiker_wiki_instead_editor": false,
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "server/app.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1520,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1211,
-								1211
-							]
-						],
-						"settings":
-						{
-							"mediawiker_wiki_instead_editor": false,
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 217.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 11,
 					"type": "text"
 				}
 			]
@@ -666,174 +420,25 @@
 			"sheets":
 			[
 				{
-					"buffer": 6,
-					"file": "server/package.json",
+					"buffer": 1,
+					"file": "client/src/containers/Container.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1158,
+						"buffer_size": 344,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								444,
-								444
+								344,
+								344
 							]
 						],
 						"settings":
 						{
-							"mediawiker_wiki_instead_editor": false,
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 51.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "server/node_modules/babel-cli/bin/babel.js",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 46,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "server/modules/blank/routes.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 285,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								285,
-								0
-							]
-						],
-						"settings":
-						{
-							"mediawiker_wiki_instead_editor": false,
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "README.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2869,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								196,
-								131
-							]
-						],
-						"settings":
-						{
-							"mediawiker_wiki_instead_editor": false,
-							"syntax": "Packages/MarkdownEditing/Markdown.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "server/test/db.spec.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3444,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								17,
-								17
-							]
-						],
-						"settings":
-						{
-							"mediawiker_wiki_instead_editor": false,
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 11,
-					"file": "server/modules/verify-addr/routes.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 305,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								237,
-								237
-							]
-						],
-						"settings":
-						{
-							"mediawiker_wiki_instead_editor": false,
+							"hasHeader": false,
 							"open_with_edit": true,
 							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
 						},
@@ -841,9 +446,19 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 0,
 					"type": "text"
 				}
+			]
+		},
+		{
+			"sheets":
+			[
+			]
+		},
+		{
+			"sheets":
+			[
 			]
 		}
 	],
@@ -866,21 +481,34 @@
 				1
 			],
 			[
+				1,
+				0,
+				2,
+				1
+			],
+			[
 				0,
 				1,
 				1,
+				2
+			],
+			[
+				1,
+				1,
+				2,
 				2
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.5,
 			1.0
 		],
 		"rows":
 		[
 			0.0,
-			0.5,
+			0.639653414883,
 			1.0
 		]
 	},
@@ -927,7 +555,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 1,
+	"selected_group": 2,
 	"settings":
 	{
 	},

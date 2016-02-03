@@ -109,5 +109,17 @@ Server using mysql with tests and a client with basic `redux-simple-route`ing an
 ### 02-hot loader-client
 Did not work when client/index.html. Needs it to be in ./dist and `contentBase: './dist',` Then got `webpack.production.config.js` to work sending app.js(70k) and vendors.js(186k) to /dist2. Nice and small.
 ### 03-async-result
-- make an asynch call
-- return result to page
+- make an asynch call to ggogle address api
+- return result to page as possible addresses
+### 04-selAddr2map
+- using Gmaps from react-maps, tested in `Unver`
+- added `<Gmaps>` component to `<VerOut>`
+- added `selected:{address: , location:{lat,lng}}` to  `state.verify`
+- `selected` prop is mapped to `state.data.verify.selected` and passed to `Veri` who passes it to `Verout`who passes lat and lng to `<Gmap>`
+- clicking on link sends `i` in returned function as a closure.
+- `Verout` s `cngSelected` creates a `selected` object and ships it out to `updSelected`
+- `Veri` takes `upSelected` from `Verout` and connects it to its `onSelected` prop.
+- `mapDispatchToProps` dispatches the `selAddr` action on `onSelected`  
+#### todo
++ send selected and approved to database
++replace input box with a list of unverified addresses 

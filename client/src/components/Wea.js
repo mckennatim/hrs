@@ -7,7 +7,7 @@ let Wea = ({dispatch}) => {
 	let input;
 	return (
 		<div>
-	 		<h4>Weatherify an address</h4>
+	 		<h4>Weather an address</h4>
 	 		<input type="text" size="60" ref={node => {input = node;}}/><br/>
 	 		<button onClick={() => {
 		        dispatch(ckAddr(input.value));

@@ -13,8 +13,15 @@ const recAddr = (raw, json) => {
 	console.log(raw)
 	return {
 		type: 'REC_ADDR',
-		result: json,
+		results: json,
 		raw
+	}
+}
+
+const selAddr = (selected) => {
+	return {
+		type: 'SEL_ADDR',
+		selected
 	}
 }
 
@@ -28,10 +35,11 @@ const fetchAddr = (raw) => {
 	    .then(response => response.json()) //same as function(response){return response.json()}
 	    .then((json)=>{
 	      console.log(json.results.length)
-	      dispatch(recAddr(raw, json.results[0])) 
+	      dispatch(recAddr(raw, json.results)) 
 	    })		
 	}
 }
 
 
-export {increase, decrease, fetchAddr};
+
+export {increase, decrease, fetchAddr, selAddr};

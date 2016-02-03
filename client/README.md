@@ -1,4 +1,8 @@
 # redux/sb/hrs/client
+## notes
+- gmaps needs height and width
+- react component tag names must be capitalized
+
 ## tag: 02-added-testing
 and fake data `test/mockData.js` and get setup for testing
 
