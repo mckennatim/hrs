@@ -6,19 +6,21 @@ import {ckAddr} from '../actions'
 let Wea = ({dispatch}) => {
 	let input;
 	return (
-		<div>
+		<div style={{display: 'flex'}}>>
 	 		<h4>Weather an address</h4>
 	 		<input type="text" size="60" ref={node => {input = node;}}/><br/>
 	 		<button onClick={() => {
-		        dispatch(ckAddr(input.value));
-		        input.value = '';}}>
-		        Find in weather
-		      </button>
+        dispatch(ckAddr(input.value));
+        input.value = '';}}>
+        Find in weather
+      </button>
    	</div>
 	);
 }
-Wea = connect()(Wea)
 
+
+
+Wea = connect()(Wea)
 export {Wea};
 
 // export default function Wea() {

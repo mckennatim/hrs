@@ -8,14 +8,32 @@ const coords = {
 };
 
 class Unver extends Component {
-
   render() {
     return (
-      <div>
-        <h1>in unver where is the map</h1>
-        <Mapp/>
+      <div style={styles.outer}>
+        <div style={styles.heading}>
+          <h2>in unver where is the map</h2>
+        </div>
+        <div style={styles.inner}>
+          <Mapp  />
+        </div>
       </div>
     );
+  }
+}
+
+const styles = {
+  outer: {
+    display:'flex',
+    flexDirection: 'column',
+    background: '#E1E1E1',
+    height: 600
+  },
+  heading:{
+    margin: 'auto'
+  },
+  inner: {
+    margin: 'auto'
   }
 }
 

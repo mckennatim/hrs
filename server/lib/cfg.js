@@ -1,5 +1,5 @@
 var secret = 'some phrase to be used to encode token';
-var url = 'http://10.0.1.102'
+var url = 'http://10.0.1.104'
 var port = 3036;
 var db= 'hero';
 

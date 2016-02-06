@@ -4,19 +4,20 @@ var mysql = require('mysql');
 var mconn = require('../../cfg').db().mysql;
 var connection = mysql.createConnection(mconn);
 
-connection.connect();
-
-ydb.getv(function(sol){
-	console.log(sol.length)
-});
+connection.connect();	
 
 module.exports = (function() {
 	'use strict';
 	var router = express.Router();
 	router.get('/verify-addr', function(req, res) {
 		console.log('in verify-addr')
-		ydb.getv((sol)=>{
-			res.send(sol)
+		var sql = "SELECT `id`, `raw` FROM `locations` WHERE veri=0 AND doma='hrs'";
+		console.log(sql)
+		console.log(req.headers)
+		connection.query(sql, function(err, rows, fields){
+			if (err) throw err;
+			//console.log(rows)
+			res.send(rows);
 		})
 	});
 	router.get('/verify-addr/like/:raw', function(req,res){

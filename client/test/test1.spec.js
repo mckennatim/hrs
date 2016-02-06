@@ -22,4 +22,21 @@ describe("hrs",()=>{
 			//console.log(nextState)
 		})
 	})
+	describe("reducing", ()=>{
+		it("your basic summing example", ()=>{
+			var wsizes = [300, 638, 980, 1456]
+			let ws = 686
+			var thei
+			var sum = wsizes.reduce((t, n, i)=>{ 
+				console.log(i, t, ws, n,'dog')
+				if(t<ws&&ws<=n){
+					console.log(i, t, ws, n)
+					thei = i
+				}
+				return n }
+			  , 0);
+			console.log(thei)
+			expect(thei).to.equal(2)
+		})
+	})
 })

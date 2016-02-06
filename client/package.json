@@ -10,6 +10,7 @@
     "react-gmaps": "1.2.2",
     "react-redux": "^4.0.0",
     "react-router": "^1.0.0",
+    "react-select": "0.9.1",
     "redux": "^3.0.4",
     "redux-logger": "2.4.0",
     "redux-simple-router": "1.0.2",
@@ -41,7 +42,7 @@
   },
   "scripts": {
     "deploy": "set NODE_ENV=production && webpack -p --config webpack.production.config.js",
-    "dev": "webpack-dev-server --port=3037",
+    "dev": "webpack-dev-server --host 0.0.0.0 --port 3037",
     "start": "webpack --watch",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js  --recursive --slow 4",
     "test:watch": "npm run test -- --watch"

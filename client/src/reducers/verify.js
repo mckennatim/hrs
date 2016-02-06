@@ -41,6 +41,10 @@ export const verify = (state = dataState, action) =>{
       return Object.assign({}, state, {
         selected: action.selected
       }) 
+    case 'REC_UNVERIFIED':
+      return Object.assign({}, state, {
+        options: action.options
+      })           
     default:
       return state
   }

@@ -3,7 +3,7 @@ var webpack = require('webpack');
 
 module.exports = {
   entry: [
-    'webpack-dev-server/client?http://localhost:3037',
+    'webpack-dev-server/client?http://0.0.0.0:3037',
     'webpack/hot/only-dev-server',
     './src/app.js'
   ],

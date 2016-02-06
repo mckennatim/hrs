@@ -2,8 +2,46 @@ const React = require('react');
 const { Link } = require('react-router');
 const { connect } = require('react-redux');
 const { pushPath } = require('redux-simple-router');
+import {setDeviceType} from '../actions'
 
-function App({ pushPath, children }) {
+
+function App({ pushPath, children, deviceTypeChanged, deviceTypes, deviceSizes}) {
+  var rtime;
+  var timeout = false;
+  var delta = 200;
+  const doneResizing = () => {
+    let ws = window.innerWidth
+    const devs = deviceTypes
+    var wsizes = deviceSizes
+    var thei
+    var sum = wsizes.reduce((t, n, i)=>{ 
+      if(t<ws&&ws<=n){
+        thei = i
+      }
+        return n 
+      }, 0);
+    const brow ={browser: devs[thei], size:ws}
+    console.log(brow) 
+    deviceTypeChanged(brow)   
+  }
+  const resizeEnd = ()=>{
+    if (new Date() - rtime < delta) {
+        setTimeout(resizeEnd, delta);
+    } else {
+        timeout = false;
+        doneResizing();
+    }    
+  }
+  const handleResize = () =>{
+    rtime = new Date();
+    if (timeout === false) {
+        timeout = true;
+        setTimeout(resizeEnd, delta);
+    }  
+  }
+
+  window.addEventListener('resize', handleResize);
+
   return (
     <div>
       <header>
@@ -25,6 +63,25 @@ function App({ pushPath, children }) {
   );
 };
 
-App = connect(null, { pushPath })(App);
+const mapStateToProps = (state) => {
+  console.log(state)
+  return {
+    deviceTypes: state.device.types,
+    deviceSizes: state.device.sizes
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deviceTypeChanged: (typeInfo) => {
+      dispatch(setDeviceType(typeInfo))
+    },
+    pushPath: () => {
+      dispatch(pushPath())
+    }
+  };
+};
+
+//App = connect(null, { pushPath })(App);
+App = connect(mapStateToProps,mapDispatchToProps)(App);
 
 export {App};

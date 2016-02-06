@@ -10,8 +10,8 @@ export const Mapp = React.createClass({
   render() {
     return (
       <Gmaps
-        width={'400px'}
-        height={'300px'}
+        width={'300px'}
+        height={'400px'}
         lat={coords.lat}
         lng={coords.lng}
         zoom={14}

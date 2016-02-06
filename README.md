@@ -111,6 +111,7 @@ Did not work when client/index.html. Needs it to be in ./dist and `contentBase: 
 ### 03-async-result
 - make an asynch call to ggogle address api
 - return result to page as possible addresses
+
 ### 04-selAddr2map
 - using Gmaps from react-maps, tested in `Unver`
 - added `<Gmaps>` component to `<VerOut>`
@@ -123,3 +124,9 @@ Did not work when client/index.html. Needs it to be in ./dist and `contentBase: 
 #### todo
 + send selected and approved to database
 +replace input box with a list of unverified addresses 
+
+### 05-responsive-js+css
+Bigger devices can render more information, 2 or 3 phone-size pages shown together perhaps. All you need to know is the size of the device and maybe when that size changes. An intial state is passed in to the `reducers/app.js` Added a `window.addEventListener('resize', handleResize);` to `App.js`, the `/` route component.  A `SET_DEVICE` action is fired after the user finishes resizing the browser. (`App.js - doneResizing()`). The `Home` component, gets the prop `browser` which can be one of 4 types. Currently, if it is type `tablet` (2) then the page renders `more` content.
+####todo
++ send selected and approved to database
++ replace input box with a list of unverified addresses 
