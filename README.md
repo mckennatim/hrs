@@ -130,3 +130,25 @@ Bigger devices can render more information, 2 or 3 phone-size pages shown togeth
 ####todo
 + send selected and approved to database
 + replace input box with a list of unverified addresses 
+
+### 06-load-on-mount
+To do so I think you need the form `class Unverified extends React.Component{}`
+You also have to pass the `dispatch` command to `props`. 
+```js
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onGetUnver: () => {
+        dispatch(fetchUnverified())
+    },
+    dispatch
+  };
+};
+```
+Now you can have the action you imported run at startup, just once
+```js
+    componentDidMount() {
+        const {dispatch} = this.props
+    dispatch(fetchUnverified())     
+    } 
+```
+voila

@@ -5,6 +5,7 @@ import {fetchAddr, selAddr, fetchUnverified} from '../actions'
 import {Gmaps} from 'react-gmaps';
 import Select from 'react-select';
 
+
 const VerIn = ({onClick, onGet, unverified}) => {
 	console.log(unverified)
 	let input
@@ -20,11 +21,10 @@ const VerIn = ({onClick, onGet, unverified}) => {
 	 		<button button onClick={() => onGet()} >
 	 			get unverified
 	 		</button><br/>
-	 		{unverified}
 			<Select
 			    name="form-field-name"
 			    value="one"
-			    unverified={unverified}
+			    options={unverified}
 			    onChange={logChange}
 			/>	    
 	    
@@ -86,7 +86,6 @@ const VerOut = ({candidates, selected, updSelected, dogs, dos}) => {
 
 const Veri = ({onRawInput, onGetUnver, onSelected, candidates, 
 		selected, unverified, dogs, dos}) => {
-	//console.log(unverified)
 	let mapProps = {
     center: [59.938043, 30.337157],
     zoom: 9, 
@@ -124,7 +123,6 @@ const mapDispatchToProps = (dispatch) => {
   	}
   };
 };
-
 const Ver = connect(mapStateToProps,mapDispatchToProps)
 (Veri);
 
