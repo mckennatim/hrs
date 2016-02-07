@@ -5,7 +5,8 @@ import {fetchAddr, selAddr, fetchUnverified} from '../actions'
 import {Gmaps} from 'react-gmaps';
 import Select from 'react-select';
 
-const VerIn = ({onClick, onGet, options}) => {
+const VerIn = ({onClick, onGet, unverified}) => {
+	console.log(unverified)
 	let input
 	const logChange = (v) => {
 		const vs = JSON.parse(v)
@@ -19,10 +20,11 @@ const VerIn = ({onClick, onGet, options}) => {
 	 		<button button onClick={() => onGet()} >
 	 			get unverified
 	 		</button><br/>
+	 		{unverified}
 			<Select
 			    name="form-field-name"
 			    value="one"
-			    options={options}
+			    unverified={unverified}
 			    onChange={logChange}
 			/>	    
 	    
@@ -82,28 +84,29 @@ const VerOut = ({candidates, selected, updSelected, dogs, dos}) => {
 	)
 }
 
-
-
-
-const Veri = ({onRawInput, onGetUnver, onSelected, candidates, selected, options, dogs, dos}) => {
+const Veri = ({onRawInput, onGetUnver, onSelected, candidates, 
+		selected, unverified, dogs, dos}) => {
+	//console.log(unverified)
 	let mapProps = {
     center: [59.938043, 30.337157],
     zoom: 9, 
 	} 
 	return(
 		<div>
-		<VerIn onClick={(val) => onRawInput(val)} onGet={() => onGetUnver()} options={options}></VerIn>
+		<VerIn onClick={(val) => onRawInput(val)} 
+			onGet={() => onGetUnver()} 
+			unverified={unverified}>
+		</VerIn>
 		<VerOut candidates={candidates} selected={selected} updSelected={(selected) => onSelected(selected)} dogs={dogs} dos={dos}></VerOut>
 		</div>
 	)
 }
 
 const mapStateToProps = (state) => {
-	console.log(state)
   return {
     candidates: state.data.verify.results,
     selected: state.data.verify.selected,
-    options: state.data.verify.options,
+    unverified: state.data.verify.unverified,
     dogs: ['butler', 'uli', 'petey', 'fritz', 'rusty', 'dusty'],
     dos: []
   };

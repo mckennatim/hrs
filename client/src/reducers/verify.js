@@ -20,7 +20,9 @@ const dataState = {
       lat: 12.44,
       lng: -7.11
     }
-  }
+  },
+  unverified: [
+  ]
 }
 //http://maps.googleapis.com/maps/api/geocode/json?address=12+parley+Vale,+Jamaica+Plain,+MA+02130&sensor=false
 
@@ -42,8 +44,9 @@ export const verify = (state = dataState, action) =>{
         selected: action.selected
       }) 
     case 'REC_UNVERIFIED':
+      //console.log(action.unverified)
       return Object.assign({}, state, {
-        options: action.options
+        unverified: action.unverified
       })           
     default:
       return state

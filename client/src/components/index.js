@@ -1,7 +1,8 @@
 import {App} from './App'
 import {Home} from './Home'
 import {Ver} from './Ver'
-import {Unver} from './Unver'
 import {Wea} from './Wea'
+import {Unverified} from './Unverified'
+import {Maps} from './Maps'
 
-export { App, Home, Ver, Unver, Wea };
+export { App, Home, Ver, Wea, Maps, Unverified };

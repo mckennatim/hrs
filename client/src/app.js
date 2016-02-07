@@ -5,7 +5,7 @@ const { Provider } = require('react-redux');
 const { Router, Route, IndexRoute } = require('react-router');
 const createHistory = require('history/lib/createHashHistory');
 const { syncReduxAndRouter} = require('redux-simple-router');
-const { App, Home, Ver, Unver, Wea } = require('./components');
+const { App, Home, Ver, Unverified, Wea, Maps } = require('./components');
 import rootReducer from './reducers';
 import configureStore from './store/configureStore'
 
@@ -22,7 +22,8 @@ ReactDOM.render(
         <Route path="/" component={App}>
           <IndexRoute component={Home}/>
           <Route path="ver" component={Ver}/>
-          <Route path="unver" component={Unver}/>
+          <Route path="unver" component={Unverified}/>
+          <Route path="maps" component={Maps}/>
           <Route path="wea" component={Wea}/>
         </Route>
       </Router>

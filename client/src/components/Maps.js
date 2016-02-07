@@ -7,7 +7,7 @@ const coords = {
   lng: -71.11114839999999
 };
 
-class Unver extends Component {
+class Maps extends Component {
   render() {
     return (
       <div style={styles.outer}>
@@ -37,4 +37,4 @@ const styles = {
   }
 }
 
-export {Unver}
+export {Maps}

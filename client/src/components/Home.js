@@ -1,7 +1,7 @@
 const React = require('react');
 const { connect } = require('react-redux');
 import { increase, decrease} from '../actions';
-import { Unver } from './Unver'
+import { Maps } from './Maps'
 
 
 function Home({ number, increase, decrease, browser, deviceTypes }) {
@@ -17,8 +17,6 @@ function Home({ number, increase, decrease, browser, deviceTypes }) {
     console.log('smaller than 600')
     more = <br/>
   }    
-
-
   return (
     <div style={{display:'flex', flexDirection:'row'}}>
       <div style={{flexGrow:1}}>

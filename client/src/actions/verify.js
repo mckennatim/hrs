@@ -39,10 +39,11 @@ const fetchAddr = (raw) => {
 	}
 }
 
-const recUnverified = (options) => {
+const recUnverified = (unverified) => {
+	//console.log(unverified)
 	return {
 		type: 'REC_UNVERIFIED',
-		options
+		unverified
 	}
 }
 
@@ -53,13 +54,13 @@ const fetchUnverified = () => {
 	  return fetch(url)
 	    .then(response => response.json()) //same as function(response){return response.json()}
 	    .then((json)=>{
-	    	let options = json.map((j)=>
+	    	let unverified = json.map((j)=>
 	    		Object.assign({}, {
 		        label: j.raw, value: JSON.stringify({id: j.id, label: j.raw})
 		      })
 	    	)
-	    	console.log(options)
-	      dispatch(recUnverified(options))
+	    	//console.log(unverified)
+	      dispatch(recUnverified(unverified))
 	    })		
 	}
 }

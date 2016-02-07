@@ -53,6 +53,8 @@ function App({ pushPath, children, deviceTypeChanged, deviceTypes, deviceSizes})
         {' '}
         <Link to="/wea">Wea</Link>
         {' '}
+        <Link to="/maps">Maps</Link>
+        {' '}
         <Link to="/unver">Unver</Link>
       </header>
       <div>
