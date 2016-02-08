@@ -56,7 +56,7 @@ const fetchUnverified = () => {
 	    .then((json)=>{
 	    	let unverified = json.map((j)=>
 	    		Object.assign({}, {
-		        label: j.raw, value: JSON.stringify({id: j.id, label: j.raw})
+		        label: j.raw, value: {id: j.id, label: j.raw}
 		      })
 	    	)
 	    	//console.log(unverified)

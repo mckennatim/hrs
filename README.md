@@ -152,3 +152,12 @@ Now you can have the action you imported run at startup, just once
     } 
 ```
 voila
+### 07-add-radium
+Radium decorates the class. You can use `Myclass=Radium(Myclass)` or
+```js
+@Radium
+class MyClass extends React.Component
+```
+Radium allows you to use :hover and the like.
+
+
