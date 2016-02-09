@@ -11,13 +11,15 @@
     "react": "^0.14.2",
     "react-dom": "^0.14.2",
     "react-gmaps": "1.2.2",
+    "react-keypress": "0.1.5",
     "react-redux": "^4.0.0",
     "react-router": "^1.0.0",
     "react-select": "0.9.1",
     "redux": "^3.0.4",
     "redux-logger": "2.4.0",
     "redux-simple-router": "1.0.2",
-    "redux-thunk": "1.0.3"
+    "redux-thunk": "1.0.3",
+    "roboto-font": "0.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.1.21",

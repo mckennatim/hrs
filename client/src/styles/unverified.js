@@ -19,9 +19,16 @@ const uvStyles ={
 	  color: 'green',
 	  display: 'block',
 	  width: 300,
-
-
-
+	},
+	inp: {
+		backgroundColor: 'beige',
+		fontSize: '1.2em',
+		height: 40,
+		width: 300
+	},
+	di: {
+		fontFamily:"'Roboto', sans-serif",
+		fontStretch: 'ultra-condensed'
 	}
 
 }

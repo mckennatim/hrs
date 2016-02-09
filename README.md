@@ -156,8 +156,15 @@ voila
 Radium decorates the class. You can use `Myclass=Radium(Myclass)` or
 ```js
 @Radium
-class MyClass extends React.Component
+class MyClass extends React.Component()
 ```
-Radium allows you to use :hover and the like.
+Radium allows you to use :hover and the like as well as using an array of styles. To use decorators you need `npm i --save babel-plugin-transform-decorators-legacy` and modify  `package.json` with the addtiional plugin
 
+```js
+    "plugins": [
+      "transform-class-properties",
+      "transform-decorators-legacy"
+    ]
+```
 
+### 08-initialize-register-unverified

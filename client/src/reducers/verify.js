@@ -21,6 +21,7 @@ const dataState = {
       lng: -7.11
     }
   },
+  unver_sel: {id:999999,  raw:'12 Parley'},
   unverified: [
   ]
 }
@@ -47,7 +48,12 @@ export const verify = (state = dataState, action) =>{
       //console.log(action.unverified)
       return Object.assign({}, state, {
         unverified: action.unverified
-      })           
+      })
+    case 'SET_UNVER_SEL':
+      //console.log(action.unver_sel)
+      return Object.assign({}, state, {
+        unver_sel: action.unver_sel
+      })                
     default:
       return state
   }

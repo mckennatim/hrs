@@ -39,6 +39,13 @@ const fetchAddr = (raw) => {
 	}
 }
 
+const setUnverSel =(unver_sel)=>{
+	return {
+		type: 'SET_UNVER_SEL',
+		unver_sel
+	}	
+}
+
 const recUnverified = (unverified) => {
 	//console.log(unverified)
 	return {
@@ -56,7 +63,8 @@ const fetchUnverified = () => {
 	    .then((json)=>{
 	    	let unverified = json.map((j)=>
 	    		Object.assign({}, {
-		        label: j.raw, value: {id: j.id, label: j.raw}
+		        //label: j.raw, value: {id: j.id, label: j.raw}
+		        id: j.id, raw: j.raw
 		      })
 	    	)
 	    	//console.log(unverified)
@@ -65,4 +73,4 @@ const fetchUnverified = () => {
 	}
 }
 
-export {fetchAddr, selAddr, fetchUnverified};
+export {fetchAddr, selAddr, fetchUnverified, setUnverSel};

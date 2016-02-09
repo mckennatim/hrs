@@ -51,11 +51,13 @@ function App({ pushPath, children, deviceTypeChanged, deviceTypes, deviceSizes})
         {' '}
         <Link to="/ver">Ver</Link>
         {' '}
+        <Link to="/reg">Register</Link>
+        {' '}
         <Link to="/wea">Wea</Link>
         {' '}
         <Link to="/maps">Maps</Link>
         {' '}
-        <Link to="/unver">Unver</Link>
+        <Link to="/unver">Unverified</Link>
       </header>
       <div>
         <button onClick={() => pushPath('/ver')}>Go to /ver</button>
@@ -66,7 +68,6 @@ function App({ pushPath, children, deviceTypeChanged, deviceTypes, deviceSizes})
 };
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
     deviceTypes: state.device.types,
     deviceSizes: state.device.sizes
@@ -77,8 +78,8 @@ const mapDispatchToProps = (dispatch) => {
     deviceTypeChanged: (typeInfo) => {
       dispatch(setDeviceType(typeInfo))
     },
-    pushPath: () => {
-      dispatch(pushPath())
+    pushPath: (path) => {
+      dispatch(pushPath(path))
     }
   };
 };

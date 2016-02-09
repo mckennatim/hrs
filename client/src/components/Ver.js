@@ -29,9 +29,7 @@ const VerIn = ({onClick, onGet, unverified}) => {
 			/>	    
 	    
 	 		<input type="text" size="60" ref={node => {input = node;}} defaultValue='12 Parley Vale, Jamaica Plain, MA 02130'/><br/>
-	 		<button onClick={() => {
-	      onClick(input.value);
-	    }}>
+	 		<button onClick={() => onClick(input.value)}>
 	      Find in weather
 	    </button><br/>
 	 	</div>
