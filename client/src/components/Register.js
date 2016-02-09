@@ -3,8 +3,10 @@ import Radium from 'radium';
 import color from 'color';
 var Keypress = require("react-keypress");
 import {connect} from 'react-redux';
-import {fetchUnverified, setUnverSel, fetchAddr} from '../actions' 
+import {fetchUnverified, setUnverSel, fetchAddr, selAddr} from '../actions' 
 import {uvStyles} from '../styles'
+const { pushPath } = require('redux-simple-router');
+
 
 
 
@@ -34,12 +36,23 @@ class Register extends React.Component{
 		document.getElementById("unver").removeEventListener("keydown",function(){})
 	}
 	render(){
-		const {unver_sel, cngUnverSel, candidates}=this.props
+		const {unver_sel, cngUnverSel, candidates, updSelected, pushPath}=this.props
 		let input
 		const onChange=(value)=>{
 			const newobj = {id:unver_sel.id, raw:value}
 			cngUnverSel(newobj)
 		}
+		const cngSelected = (i) => {
+			console.log(candidates[i].formatted_address)
+			let coords = candidates[i].geometry.location
+			console.log(coords)
+			let selected ={}
+			selected.address=candidates[i].formatted_address
+			selected.location=coords
+			selected.id = unver_sel.id
+			updSelected(selected)
+			pushPath('/maps')
+		}		
 		return(
 			<div>
 				<h3>Register</h3>
@@ -80,6 +93,12 @@ const mapDispatchToProps = (dispatch) => {
   	onRawInput: (raw) => {
   		dispatch(fetchAddr(raw))
   	},  		
+  	updSelected: (selected) => {
+  		dispatch(selAddr(selected))
+  	}, 
+    pushPath: (path) => {
+      dispatch(pushPath(path))
+    },  	  	 		
   	dispatch
   };
 };
