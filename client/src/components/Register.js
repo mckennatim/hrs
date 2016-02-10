@@ -34,16 +34,20 @@ class Register extends React.Component{
 		this.unver.removeEventListener("keydown",function(){})
 		this.device.removeEventListener("keydown",function(){})
 	}	
+	hideDroidKbd(element){
+		element.setAttribute("readonly", "readonly")
+		element.setAttribute("disabled", "true")
+		setTimeout(function(){
+			element.removeAttribute("readonly")
+			element.removeAttribute("disabled")				
+		},100)
+	}
+
 	rawChanged(event){
 		const {unver_sel, onRawInput}=this.props
 		if(event.keyCode==13){
 			onRawInput(unver_sel.raw)
-			this.unver.setAttribute("readonly", "readonly")
-			this.unver.setAttribute("disabled", "true")
-			setTimeout(function(){
-				this.unver.removeAttribute("readonly")
-				this.unver.removeAttribute("disabled")				
-			},100)
+			this.hideDroidKbd(this.unver)
 			console.log(unver_sel)
 		}
 	}
@@ -74,6 +78,7 @@ class Register extends React.Component{
 			console.log('hit enter')
 			console.log(this.devchars)
 			this.ckDevid(this.devchars)
+			this.hideDroidKbd(this.device)
 		}
 	}
 

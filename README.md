@@ -174,5 +174,17 @@ Radium allows you to use :hover and the like as well as using an array of styles
 ### 10-maps->reg
 Started moving functions out of the render method and up in the class proper where they belong
 
-### 1-refa2unsel_ver-ck
+### 11-refa2unsel_ver-ck
 Refactored away from selected to keeping everything in unsel_ver. &#10004; now works
+### 12-hide-droid-keyboard
+it doesn't go away on an input field data entry. Here's how you make it go away
+in `Register.js` component
+```js
+    hideDroidKbd(element){
+        element.setAttribute("readonly", "readonly")
+        element.setAttribute("disabled", "true")
+        setTimeout(function(){
+            element.removeAttribute("readonly")
+            element.removeAttribute("disabled")             
+        },100)
+    }
