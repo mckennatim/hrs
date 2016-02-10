@@ -188,3 +188,12 @@ in `Register.js` component
             element.removeAttribute("disabled")             
         },100)
     }
+```
+
+### 13-remote-debugging-jsconsole
+BTW On using `value` vs `defaultValue` for an `input`.
+
+Consider the 2 input boxes in `Register.js`component. The `id="unver"` input connects the value directly to the state so state is updated `onChange` (on every keystroke). In the `id="device` the `defaultValue` is set on starup and after that every keystroke `onChange` detects is put into a 'local' variable `thisdevchars` defined in the constructor. No change of state happens until the `enter` `keyCode=13` is hit. It is listened to the old fashion way.
+
+Remote debugging can happen for iphones on a windows pc using <a href="http://jsconsole.com/remote-debugging.html">jsconsole.com</a> I amd using :listen URAP-IRAB-CYURAP-YIB2U
+

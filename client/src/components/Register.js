@@ -31,6 +31,7 @@ class Register extends React.Component{
 		})
 	}
 	componentWillUnmount() {
+		console.log(this.unver)
 		this.unver.removeEventListener("keydown",function(){})
 		this.device.removeEventListener("keydown",function(){})
 	}	
@@ -81,7 +82,6 @@ class Register extends React.Component{
 			this.hideDroidKbd(this.device)
 		}
 	}
-
 
 	onDevChange(inp){
 		this.devchars= inp
