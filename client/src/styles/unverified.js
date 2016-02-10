@@ -10,7 +10,7 @@ const uvStyles ={
 	  borderBottom: '1px solid green',
     ':hover': {
     	transform: 'translateX(30px) rotate(7deg) scale(1.3,1.3)',
-      backgroundColor: 'aquamarine'
+      	backgroundColor: 'aquamarine'
     },
 
 	},
@@ -29,6 +29,10 @@ const uvStyles ={
 	di: {
 		fontFamily:"'Roboto', sans-serif",
 		fontStretch: 'ultra-condensed'
+	},
+	ck: {
+		color: 'green',
+		fontSize: '1.4em'
 	}
 
 }

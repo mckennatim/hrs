@@ -171,4 +171,8 @@ Radium allows you to use :hover and the like as well as using an array of styles
 
 ### 09-unver->register->maps
 
+### 10-maps->reg
+Started moving functions out of the render method and up in the class proper where they belong
 
+### 10-refa2unsel_ver->ck
+Refactored away from selected to keeping everything in unsel_ver. &#10004; now works

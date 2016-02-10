@@ -11,7 +11,7 @@ module.exports = (function() {
 	var router = express.Router();
 	router.get('/verify-addr', function(req, res) {
 		console.log('in verify-addr')
-		var sql = "SELECT `id`, `raw` FROM `locations` WHERE veri=0 AND doma='hrs'";
+		var sql = "SELECT `id`, `raw`, `devid`, `address`, `lat`, `lng` FROM `locations` WHERE veri=0 AND doma='hrs'";
 		console.log(sql)
 		console.log(req.headers)
 		connection.query(sql, function(err, rows, fields){

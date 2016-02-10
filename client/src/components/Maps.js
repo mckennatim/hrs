@@ -4,32 +4,48 @@ import Radium from 'radium';
 import {connect} from 'react-redux';
 import {Gmaps} from 'react-gmaps';
 import {uvStyles} from '../styles'
+const { pushPath } = require('redux-simple-router');
+import {setUnverSel} from '../actions' 
+
+
 
 class Maps extends React.Component{
   constructor(props) {
     super(props)
   }
+  approved (){
+    const {unver_sel, pushPath, cngUnverSel} =this.props
+    const newun = Object.assign({}, unver_sel,
+      {isThePlace: true})
+    cngUnverSel(newun)
+    pushPath('/reg')
+  }
   render() {
-    const {selected} = this.props
+    const {unver_sel, pushPath} = this.props
     return (
       <div style={styles.outer}>
         <div style={styles.heading}>
-          <h2>{selected.address}</h2>
+          <h4>{unver_sel.address}</h4>
+          <div>
+            <button onClick={()=>pushPath('/reg')} >try another</button>
+            <button onClick={()=>this.approved()}>that's the place</button>
+          </div>           
         </div>
         <div style={styles.inner}>
-        <Gmaps
+         
+          <Gmaps
           width={'300px'}
           height={'400px'}
-          lat={selected.location.lat}
-          lng={selected.location.lng}
+          lat={unver_sel.lat}
+          lng={unver_sel.lng}
           zoom={14}
           loadingMessage={'Be happy'}
           params={{v: '3.exp'}}
           >
-        </Gmaps>
+          </Gmaps>
         </div>
       </div>
-    );
+      );
   }
 }
 
@@ -50,12 +66,18 @@ const styles = {
 
 const mapStateToProps = (state) => {
   return {
-    selected: state.data.verify.selected
+    unver_sel: state.data.verify.unver_sel
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    pushPath: (path) => {
+      dispatch(pushPath(path))
+    },  
+    cngUnverSel: (unver_sel) => {
+      dispatch(setUnverSel(unver_sel))
+    },        
     dispatch
   };
 };

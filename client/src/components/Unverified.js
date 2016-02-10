@@ -3,7 +3,7 @@ import Radium from 'radium';
 import color from 'color';
 import {connect} from 'react-redux';
 const { pushPath } = require('redux-simple-router');
-import {fetchUnverified, setUnverSel} from '../actions' 
+import {fetchUnverified, setUnverSel, fetchAddr} from '../actions' 
 import {uvStyles} from '../styles'
 const { Link } = require('react-router');
 
@@ -13,13 +13,15 @@ class Unverified extends React.Component{
 		const {dispatch} = this.props
     dispatch(fetchUnverified())		
 	}
-	render() {
-		const {unverified, onGetUnver, onUnverSel, pushPath} = this.props
-		const onClickUnverSel = (unver_sel) =>{
-			onUnverSel(unver_sel)
-			pushPath('/reg')
+	onClickUnverSel (unver_sel) {
+		const {onUnverSel, pushPath, dispatch} = this.props
+		onUnverSel(unver_sel)
+		dispatch(fetchAddr(unver_sel.raw))
+		pushPath('/reg')
 
-		}
+	}	
+	render() {
+		const {unverified, onGetUnver, pushPath} = this.props
 		return (
 			<div style={uvStyles.di}>
 				<div>
@@ -32,7 +34,7 @@ class Unverified extends React.Component{
 					<ul style={uvStyles.ul}>
 						{unverified.map((un)=>(
 						<li style={uvStyles.li} key={un.id}
-						onClick={()=>onClickUnverSel(un)} >
+						onClick={()=>this.onClickUnverSel(un)} >
 								{un.raw}
 						</li>
 						))}

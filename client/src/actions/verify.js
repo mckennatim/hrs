@@ -62,10 +62,7 @@ const fetchUnverified = () => {
 	    .then(response => response.json()) //same as function(response){return response.json()}
 	    .then((json)=>{
 	    	let unverified = json.map((j)=>
-	    		Object.assign({}, {
-		        //label: j.raw, value: {id: j.id, label: j.raw}
-		        id: j.id, raw: j.raw
-		      })
+	    		Object.assign({}, j)
 	    	)
 	    	//console.log(unverified)
 	      dispatch(recUnverified(unverified))

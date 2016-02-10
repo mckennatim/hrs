@@ -19,9 +19,17 @@ const dataState = {
     location: {
       lat: 12.44,
       lng: -7.11
-    }
+    },
+    isTheDev: false,
+    isThePlace: false,
+    devid: 'IFUC',
+    idx:-44
   },
-  unver_sel: {id:999999,  raw:'12 Parley'},
+  unver_sel: {
+    id:999999,  
+    raw:'12 Parley',
+    devid: 'CYURAP'
+  },
   unverified: [
   ]
 }
