@@ -19,7 +19,8 @@
     "redux-logger": "2.4.0",
     "redux-simple-router": "1.0.2",
     "redux-thunk": "1.0.3",
-    "roboto-font": "0.1.0"
+    "roboto-font": "0.1.0",
+    "superagent": "1.7.2"
   },
   "devDependencies": {
     "babel-core": "^6.1.21",

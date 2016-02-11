@@ -1,6 +1,7 @@
 const dataState = {
   raw: '',
   isFetching: false,
+  done: false,
   result: {},
   results: [
     {
@@ -31,6 +32,8 @@ const dataState = {
     devid: 'CYURAP'
   },
   unverified: [
+  ],
+  verified: [
   ]
 }
 //http://maps.googleapis.com/maps/api/geocode/json?address=12+parley+Vale,+Jamaica+Plain,+MA+02130&sensor=false
@@ -41,11 +44,15 @@ export const verify = (state = dataState, action) =>{
       return Object.assign({}, state, {
         isFetching: true
       })    
+    case 'SET_DONE':
+      return Object.assign({}, state, {
+        done: action.done
+      })    
     case 'REC_ADDR':
       return Object.assign({}, state, {
         isFetching: false,
-        raw: action.results[0].formatted_address,
-        result: action.results[0],
+        //raw: action.results[0].formatted_address,
+        //result: action.results[0],
         results: action.results
       })
     case 'SEL_ADDR':
@@ -57,11 +64,26 @@ export const verify = (state = dataState, action) =>{
       return Object.assign({}, state, {
         unverified: action.unverified
       })
+    case 'REC_VERIFIED':
+      //console.log(action.verified)
+      return Object.assign({}, state, {
+        verified: action.verified
+      })
     case 'SET_UNVER_SEL':
       //console.log(action.unver_sel)
       return Object.assign({}, state, {
         unver_sel: action.unver_sel
-      })                
+      }) 
+    case 'POST_UNVER_COMPL':
+      return Object.assign({},state, {
+        isFetching: false,
+        done: action.done
+      }) 
+    case 'POST_UNVER_REQ':
+      return Object.assign({},state, {
+        isFetching: false,
+        done: action.done
+      })            
     default:
       return state
   }

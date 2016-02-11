@@ -3,7 +3,7 @@ import Radium from 'radium';
 import color from 'color';
 var Keypress = require("react-keypress");
 import {connect} from 'react-redux';
-import {fetchUnverified, setUnverSel, fetchAddr, selAddr} from '../actions' 
+import {fetchUnverified, setUnverSel, fetchAddr, selAddr, recAddr, postUnverified, setDone} from '../actions' 
 import {uvStyles} from '../styles'
 const { pushPath } = require('redux-simple-router');
 
@@ -17,7 +17,8 @@ class Register extends React.Component{
 		this.isDev = false
 	}
 	componentDidMount() {
-		const {unver_sel} = this.props
+		const {unver_sel, setDone} = this.props
+		setDone(false);
 		this.devchars=unver_sel.devid
 		this.ckDevid(this.devchars)
 		this.unver = document.getElementById("unver")
@@ -55,7 +56,7 @@ class Register extends React.Component{
 	ckDevid (devchars){
 		const {unver_sel, cngUnverSel}=this.props
 		//a fake check, really would check device database
-		if (this.devchars.length>6){
+		if (this.devchars && this.devchars.length>6){
 			console.log('devchars is longer than 6')
 			const newusel = Object.assign({}, unver_sel, {
 				isTheDev : true,
@@ -91,6 +92,19 @@ class Register extends React.Component{
 		const newobj = {id:unver_sel.id, raw:value}
 		cngUnverSel(newobj)		
 	}
+	makeNew() {
+		const {cngUnverSel, clearCandidates}=this.props
+		const newun = {
+			id:999999,  
+	    raw:'search for a place',
+	    devid: 'CYURD'
+		}
+		console.log('in maken new')
+		let cand = [];
+		cand.push({formatted_address: 'possible locations will list here'})
+		cngUnverSel(newun)	
+		clearCandidates(cand)
+	}
 	selAddr(i) {
 		const {candidates, cngUnverSel, pushPath, unver_sel} = this.props
 		//console.log(candidates[i].formatted_address)
@@ -122,13 +136,63 @@ class Register extends React.Component{
 				uvStyles.li
 			]
 		}
-	}		
+	}	
+	isBothDone(){
+		const{unver_sel}=this.props
+		if (unver_sel.isTheDev && unver_sel.isThePlace){
+			return true
+		}else{
+			return false
+		}
+	}
+	regState(){
+		const {isFetching, done} = this.props
+		if (isFetching){
+			return (<span>X</span>)
+		}else if(done){
+			//setDone(false)
+			//this.goSoonTo('./unver', 300)
+			return (<span style={[uvStyles.ck]} >&#10004;</span>)
+		}
+		return
+	}	
+
+	goSoonTo(path, when){
+		const{pushPath, setDone}=this.props
+		setTimeout(function(){
+			setDone(false)
+			pushPath(path)
+		},when)		
+	}
+
+	save(){
+		const{unver_sel, save2db} = this.props
+		save2db(unver_sel)
+		this.goSoonTo('/unver', 700)
+	}
+
 	render(){
 		const {unver_sel, candidates}=this.props
 		let input, dev
 		return(
 			<div>
-				<h3>Register</h3>
+				<h3>Register 
+					<button style={[uvStyles.ck]}
+						onClick={()=>this.makeNew()}
+						>new
+					</button>
+					<button style={[ 
+							uvStyles.ck]}>del</button>
+					<button style={[
+							{display:this.isBothDone()?'inline':'none'}, 
+							uvStyles.ck
+						]}
+						onClick={()=>this.save()}
+						>save
+					</button>
+					<span>
+					{this.regState()}</span>
+				</h3>
 				<h4>Device: {unver_sel.devid}
 					<span style={[
 							{display:unver_sel.isTheDev?'inline':'none'}, 
@@ -144,13 +208,13 @@ class Register extends React.Component{
 							uvStyles.ck
 						]}>&#10004;</span> 
 				</h4>
-				<h5>raw</h5>	
+				<h5>search</h5>	
 					<input id="unver" type="text" ref={node => {input = node;}} 
 					value={unver_sel.raw}
 					onChange={()=>this.onRawChange(input.value)}
 					style={uvStyles.inp}/><br/>
 					<div>
-						<h5>candidate locations</h5>	
+						<h5>search results</h5>	
 						<ul style={uvStyles.ul}>
 						{candidates.map((c, i) => {
 							return (
@@ -169,6 +233,8 @@ class Register extends React.Component{
 
 const mapStateToProps = (state) => {
   return {
+  	isFetching: state.data.verify.isFetching,
+  	done: state.data.verify.done,
     unver_sel: state.data.verify.unver_sel,
     selected: state.data.verify.selected,
     candidates: state.data.verify.results
@@ -186,8 +252,17 @@ const mapDispatchToProps = (dispatch) => {
   	updSelected: (selected) => {
   		dispatch(selAddr(selected))
   	}, 
+  	clearCandidates: (blank) => {
+  		dispatch(recAddr(blank))
+  	}, 
     pushPath: (path) => {
       dispatch(pushPath(path))
+    },  	  	 		
+    save2db: (unver_sel) => {
+      dispatch(postUnverified(unver_sel))
+    },     
+    setDone: (tf) => {
+      dispatch(setDone(tf))
     },  	  	 		
   	dispatch
   };

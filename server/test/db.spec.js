@@ -30,7 +30,7 @@ describe("connection",()=>{
 	it('select from locations', (done)=>{
 		ydb.getv(function(sol){
 			//console.log(sol[2].raw)
-		  expect(sol[2].raw).to.equal('Climax Mine, Colorado')
+		  expect(sol[2].raw).to.equal('Climax Mine, Colorado, CO')
 		  done();			
 		});
 	});
@@ -81,7 +81,7 @@ describe("connection",()=>{
 		 		//console.log(loc) 
 		 	})
 		 	//console.log(locations)
-		  expect(locations[2]).to.equal('Climax Mine, Colorado')
+		  expect(locations[2]).to.equal('Climax Mine, Colorado, CO')
 		  expect(locations[2]).to.equal(rows[2].raw)
 		  done();
 		});

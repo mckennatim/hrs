@@ -197,3 +197,56 @@ Consider the 2 input boxes in `Register.js`component. The `id="unver"` input con
 
 Remote debugging can happen for iphones on a windows pc using <a href="http://jsconsole.com/remote-debugging.html">jsconsole.com</a> I amd using :listen URAP-IRAB-CYURAP-YIB2U
 
+### <a href="http://stackoverflow.com/questions/35326737/fetch-isnt-working-as-expected">fetch put not working as expected</a> 
+
+
+I am using `isomorphic-fetch` in a project, `gets` work fine on the client, I am having trouble with `puts`. The server side tests work fine using `superagent` in `mocha` so I went back there to try the identical test with `fetch`.  I get the same server error as when I run it on the client. Here are the tests:
+```js
+    it('puts an update for home', function(done){
+        var body = {address: raw, devid: 'IAMSJDRF1', veri:1}
+        superagent
+            .put(`${httpLoc}${homeId}`)
+            .set('origin', ht.url)
+            .send(body)
+            .end(function(e,res){
+                //console.log(e)
+                console.log(res.body)
+                expect(res.body.affectedRows).to.equal(1)
+                done();
+            })
+    })
+    it('puts a fetch update for home', function(done){
+        var body = {address: raw, devid: 'IAMSJDRF1', veri:1}
+        fetch(`${httpLoc}${homeId}`, {method: 'put', body: body})
+            .then(function(res){
+                //console.log(e)
+                console.log(res.body)
+                expect(res.body.affectedRows).to.equal(1)
+                done();
+            })
+    })
+    ```
+
+and here are the server results:
+
+```js
+UPDATE locations SET `address` = '12 Parley Vale', `devid` = 'IAMSJDRF1', `veri` = 1 WHERE id = '10047'
+null
+PUT /api/hrs/verify-addr/10047 200 4.262 ms - 168
+in verify-addr/id
+{}
+UPDATE locations SET  WHERE id = '10047'
+{ [Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE id = '10047'' at line 1]
+  code: 'ER_PARSE_ERROR',
+  errno: 1064,
+  sqlState: '42000',
+  index: 0 }
+PUT /api/hrs/verify-addr/10047 200 3.390 ms - -
+```
+
+The body isn't getting sent with `fetch`. I tried JSON.stringify'ing body but that didn't work either. Any ideas?
+
+No response, switching to superagent on the client
+
+### 14-put2forecastDb-locations-verified
+Saves the checked record and once it signals done, `putPath('/unver)`. Async process is: send a request action, make the put, send a response action.

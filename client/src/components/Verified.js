@@ -3,38 +3,38 @@ import Radium from 'radium';
 import color from 'color';
 import {connect} from 'react-redux';
 const { pushPath } = require('redux-simple-router');
-import {fetchUnverified, setUnverSel, fetchAddr} from '../actions' 
+import {fetchVerified, setUnverSel, fetchAddr} from '../actions' 
 import {uvStyles} from '../styles'
 const { Link } = require('react-router');
 
 @Radium
 class Verified extends React.Component{
 	componentDidMount() {
-		const {dispatch} = this.props
-    dispatch(fetchVerified())		
+		const {onGetVer} = this.props
+    onGetVer()		
 	}
-	onClickUnverSel (unver_sel) {
-		const {onUnverSel, pushPath, dispatch} = this.props
-		onUnverSel(unver_sel)
-		dispatch(fetchAddr(unver_sel.raw))
+	onClickVerSel (ver_sel) {
+		const {onVerSel, pushPath, dispatch} = this.props
+		onVerSel(ver_sel)
+		dispatch(fetchAddr(ver_sel.raw))
 		pushPath('/reg')
 
 	}	
 	render() {
-		const {unverified, onGetUnver, pushPath} = this.props
+		const {verified, onGetVer, pushPath} = this.props
 		return (
 			<div style={uvStyles.di}>
 				<div>
-					<h3>Un-verified Addresses</h3>
-			 		<button button onClick={() => onGetUnver()} >
+					<h3>Verified Addresses</h3>
+			 		<button button onClick={() => onGetVer()} >
 			 			Refresh
 			 		</button><br/>					
 				</div>
 				<div>
 					<ul style={uvStyles.ul}>
-						{unverified.map((un)=>(
+						{verified.map((un)=>(
 						<li style={uvStyles.li} key={un.id}
-						onClick={()=>this.onClickUnverSel(un)} >
+						onClick={()=>this.onClickVerSel(un)} >
 								{un.raw}
 						</li>
 						))}
@@ -46,16 +46,16 @@ class Verified extends React.Component{
 }
 const mapStateToProps = (state) => {
   return {
-    unverified: state.data.verify.unverified
+    verified: state.data.verify.verified
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-  	onGetUnver: () => {
+  	onGetVer: () => {
   		dispatch(fetchVerified())
   	}, 
-  	onUnverSel: (unver_sel) => {
-  		dispatch(setUnverSel(unver_sel))
+  	onVerSel: (ver_sel) => {
+  		dispatch(setUnverSel(ver_sel))
   	},
     pushPath: (path) => {
       dispatch(pushPath(path))

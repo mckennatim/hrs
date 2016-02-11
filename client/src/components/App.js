@@ -50,7 +50,7 @@ function App({ pushPath, children, deviceTypeChanged, deviceTypes, deviceSizes})
         {' '}
         <Link to="/">Home</Link>
         {' '}
-        <Link to="/ver">Ver</Link>
+        <Link to="/ver">Verified</Link>
         {' '}
         <Link to="/reg">Register</Link>
         {' '}

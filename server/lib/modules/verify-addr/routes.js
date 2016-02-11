@@ -20,6 +20,17 @@ module.exports = (function() {
 			res.send(rows);
 		})
 	});
+	router.get('/verify-addr/ver', function(req, res) {
+		console.log('in verify-addr')
+		var sql = "SELECT `id`, `raw`, `devid`, `address`, `lat`, `lng` FROM `locations` WHERE veri=1 AND doma='hrs'";
+		console.log(sql)
+		console.log(req.headers)
+		connection.query(sql, function(err, rows, fields){
+			if (err) throw err;
+			//console.log(rows)
+			res.send(rows);
+		})
+	});
 	router.get('/verify-addr/like/:raw', function(req,res){
 		console.log("in verify-addr/like:raw");
 		var eraw = req.params.raw;
