@@ -1,9 +1,11 @@
 import React from 'react';
-import Radium from 'radium';
+import Radium from '../styles/radium.min.js';
+
+// import Radium from 'radium';
 import color from 'color';
 import {connect} from 'react-redux';
 const { pushPath } = require('redux-simple-router');
-import {fetchVerified, setUnverSel, fetchAddr} from '../actions' 
+import {fetchVerified, setVerSel, fetchAddr} from '../actions' 
 import {uvStyles} from '../styles'
 const { Link } = require('react-router');
 
@@ -13,11 +15,13 @@ class Verified extends React.Component{
 		const {onGetVer} = this.props
     onGetVer()		
 	}
-	onClickVerSel (ver_sel) {
+	onClickVerSel (id) {
 		const {onVerSel, pushPath, dispatch} = this.props
-		onVerSel(ver_sel)
-		dispatch(fetchAddr(ver_sel.raw))
-		pushPath('/reg')
+		//onVerSel(id)
+		//dispatch(fetchAddr(ver_sel.raw))
+		const path = `/ver/${id}`
+		console.log(path)
+		pushPath(path)
 
 	}	
 	render() {
@@ -34,7 +38,7 @@ class Verified extends React.Component{
 					<ul style={uvStyles.ul}>
 						{verified.map((un)=>(
 						<li style={uvStyles.li} key={un.id}
-						onClick={()=>this.onClickVerSel(un)} >
+						onClick={()=>this.onClickVerSel(un.id)} >
 								{un.raw}
 						</li>
 						))}
@@ -55,7 +59,7 @@ const mapDispatchToProps = (dispatch) => {
   		dispatch(fetchVerified())
   	}, 
   	onVerSel: (ver_sel) => {
-  		dispatch(setUnverSel(ver_sel))
+  		dispatch(setVerSel(ver_sel))
   	},
     pushPath: (path) => {
       dispatch(pushPath(path))

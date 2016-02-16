@@ -2,6 +2,7 @@ const React = require('react');
 const { connect } = require('react-redux');
 import { increase, decrease} from '../actions';
 import { Maps } from './Maps'
+import {Unverified} from './Unverified'
 
 
 function Home({ number, increase, decrease, browser, deviceTypes }) {
@@ -12,7 +13,7 @@ function Home({ number, increase, decrease, browser, deviceTypes }) {
   console.log(window.innerWidth)
   if (devNum==2) {
     console.log('bigger than 600')
-    more = <div style={{flexGrow:1}}> <Unver/> </div>
+    more = <div style={{flexGrow:1}}> <Unverified/> </div>
   }else{
     console.log('smaller than 600')
     more = <br/>

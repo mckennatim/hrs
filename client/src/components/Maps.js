@@ -1,8 +1,9 @@
 //const React = require('react');
 import React, {PropTypes, Component} from 'react';
-import Radium from 'radium';
+import Radium from '../styles/radium.min.js';
+// import Radium from 'radium';
 import {connect} from 'react-redux';
-import {Gmaps} from 'react-gmaps';
+import {Gmaps, Marker} from 'react-gmaps';
 import {uvStyles} from '../styles'
 const { pushPath } = require('redux-simple-router');
 import {setUnverSel} from '../actions' 
@@ -20,6 +21,11 @@ class Maps extends React.Component{
     cngUnverSel(newun)
     pushPath('/reg')
   }
+
+  onDragEnd(e){
+    console.log('onDragEnd', e.latLng.lat())
+  }
+
   render() {
     const {unver_sel, pushPath} = this.props
     return (
@@ -34,14 +40,19 @@ class Maps extends React.Component{
         <div style={styles.inner}>
          
           <Gmaps
-          width={'300px'}
-          height={'400px'}
-          lat={unver_sel.lat}
-          lng={unver_sel.lng}
-          zoom={14}
-          loadingMessage={'Be happy'}
-          params={{v: '3.exp'}}
-          >
+            width={'300px'}
+            height={'400px'}
+            lat={unver_sel.lat}
+            lng={unver_sel.lng}
+            zoom={14}
+            loadingMessage={'Be happy'}
+            params={{v: '3.exp'}}
+            >
+          <Marker
+            lat={unver_sel.lat}
+            lng={unver_sel.lng}
+            draggable={true}
+            onDragEnd={this.onDragEnd} />            
           </Gmaps>
         </div>
       </div>

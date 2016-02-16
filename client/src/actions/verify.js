@@ -56,6 +56,12 @@ const setUnverSel =(unver_sel)=>{
 		unver_sel
 	}	
 }
+const setVerSel =(idx)=>{
+	return {
+		type: 'SET_VER_SEL',
+		idx
+	}	
+}
 
 const recUnverified = (unverified) => {
 	//console.log(unverified)
@@ -101,10 +107,10 @@ const fetchVerified = () => {
 	  return fetch(url)
 	    .then(response => response.json()) //same as function(response){return response.json()}
 	    .then((json)=>{
-	    	let verified = json.map((j)=>
-	    		Object.assign({}, j)
-	    	)
-	    	//console.log(verified)
+	    	const verified=[]
+	    	json.forEach((j)=>{
+	    		verified[j.id]=j	
+	    	})
 	      dispatch(recVerified(verified))
 	    })		
 	}
@@ -152,6 +158,6 @@ const postUnverified =(unver_sel)=>{
 
 export {fetchAddr, selAddr, recAddr, fetchUnverified, setUnverSel, 
 	postUnverCompl, postUnverified, postUnverReq, setDone,
-	fetchVerified
+	fetchVerified, setVerSel
 
 };

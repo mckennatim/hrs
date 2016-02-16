@@ -250,3 +250,5 @@ No response, switching to superagent on the client
 
 ### 14-put2forecastDb-locations-verified
 Saves the checked record and once it signals done, `putPath('/unver)`. Async process is: send a request action, make the put, send a response action.
+
+##$ 15-move-to-lightweight

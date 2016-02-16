@@ -1,5 +1,7 @@
 import React from 'react';
-import Radium from 'radium';
+import Radium from '../styles/radium.min.js';
+
+// import Radium from 'radium';
 import color from 'color';
 import {connect} from 'react-redux';
 const { pushPath } = require('redux-simple-router');

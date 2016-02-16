@@ -33,8 +33,13 @@ const dataState = {
   },
   unverified: [
   ],
-  verified: [
-  ]
+  verified: [{
+    id:1,
+    address: 'no address',
+    devid: 'no devices fetched',
+    lat: 42.3150166,
+    lng: -71.1111484
+  }]
 }
 //http://maps.googleapis.com/maps/api/geocode/json?address=12+parley+Vale,+Jamaica+Plain,+MA+02130&sensor=false
 
@@ -73,6 +78,10 @@ export const verify = (state = dataState, action) =>{
       //console.log(action.unver_sel)
       return Object.assign({}, state, {
         unver_sel: action.unver_sel
+      }) 
+    case 'SET_VER_SEL':
+      return Object.assign({}, state, {
+        ver_sel: state.verified[action.idx]
       }) 
     case 'POST_UNVER_COMPL':
       return Object.assign({},state, {

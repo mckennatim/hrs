@@ -1,5 +1,5 @@
 import React from 'react';
-import Radium from 'radium';
+import Radium from '../styles/radium.min.js';
 import color from 'color';
 var Keypress = require("react-keypress");
 import {connect} from 'react-redux';
@@ -96,7 +96,7 @@ class Register extends React.Component{
 		const {cngUnverSel, clearCandidates}=this.props
 		const newun = {
 			id:999999,  
-	    raw:'search for a place',
+	    raw:'',
 	    devid: 'CYURD'
 		}
 		console.log('in maken new')
@@ -211,6 +211,7 @@ class Register extends React.Component{
 				<h5>search</h5>	
 					<input id="unver" type="text" ref={node => {input = node;}} 
 					value={unver_sel.raw}
+					placeholder="search for a place"
 					onChange={()=>this.onRawChange(input.value)}
 					style={uvStyles.inp}/><br/>
 					<div>
